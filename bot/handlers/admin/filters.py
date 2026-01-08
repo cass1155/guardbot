@@ -100,7 +100,7 @@ async def save_filter(message: types.Message, state: FSMContext):
             await message.answer(f"🪄 Автоматически преобразовано в умный фильтр:\n`{pattern}`")
 
     async for session in get_session():
-        new_filter = Filter(chat_id=chat_id, filter_type=filter_type, pattern=pattern, action="delete")
+        new_filter = Filter(chat_id=int(chat_id), filter_type=filter_type, pattern=pattern, action="delete")
         session.add(new_filter)
         await session.commit()
     
