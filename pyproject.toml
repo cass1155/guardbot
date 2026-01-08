@@ -3,6 +3,7 @@ name = "telegram-moderation-bot"
 version = "0.1.0"
 description = "Advanced Telegram Moderation Bot with Inline Admin Panel"
 authors = ["Antigravity"]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.10"
