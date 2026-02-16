@@ -2,13 +2,15 @@ import asyncio
 import logging
 import sys
 from bot.core.loader import bot, dp, settings
-from bot.core.database import engine, Base
+from bot.core.database import engine, Base, wait_for_db
 from bot.middlewares import AuthMiddleware, ChatManagementMiddleware
 from bot.handlers.admin import menu, filters, settings as admin_settings, stats, logs
 from bot.handlers.moderation import messages
 from bot.handlers import events
 
 async def on_startup():
+    # Wait for database to be ready (with retries)
+    await wait_for_db()
     # Create tables
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
